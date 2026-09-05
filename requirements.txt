@@ -1,0 +1,26 @@
+# ─────────────────────────────────────────────
+# Mobile App Security Triage Engine
+# Pinned requirements — resolves instantly
+# ─────────────────────────────────────────────
+
+# Core APK analysis (already installed: 4.1.4)
+androguard>=4.0
+
+# CLI + UI
+click>=8.1
+rich>=13.0
+
+# AI summarization (optional — use --skip-ai to bypass)
+langchain>=0.2
+langchain-anthropic>=0.1
+langchain-openai>=0.1
+
+# Environment
+python-dotenv>=1.0
+
+# Dynamic analysis hook generator
+# frida-tools pinned to avoid hours of backtracking
+frida-tools>=12.0,<14.0
+
+# Testing
+pytest>=8.0

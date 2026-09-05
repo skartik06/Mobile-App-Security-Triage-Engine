@@ -1,0 +1,41 @@
+# === Secrets & Config ===
+.env
+
+# === APK Files (potentially large / proprietary) ===
+*.apk
+*.aab
+
+# === Generated Reports ===
+reports/
+!reports/.gitkeep
+
+# === JADX decompiled output ===
+jadx_output/
+
+# === Python ===
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+
+# === Virtual Environments ===
+.venv/
+venv/
+env/
+ENV/
+
+# === IDE ===
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# === OS ===
+.DS_Store
+Thumbs.db
