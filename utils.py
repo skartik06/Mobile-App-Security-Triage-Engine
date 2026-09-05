@@ -216,6 +216,142 @@ def score_to_severity(score: float) -> str:
 
 
 # ---------------------------------------------------------------------------
+# CWE + OWASP Mobile Top 10 Reference Mapping
+# ---------------------------------------------------------------------------
+
+# Maps finding_type → list of CWE IDs with titles
+_CWE_MAP: dict[str, list[dict]] = {
+    "dangerous_permission": [
+        {"id": "CWE-250", "title": "Execution with Unnecessary Privileges",
+         "url": "https://cwe.mitre.org/data/definitions/250.html"},
+        {"id": "CWE-272", "title": "Least Privilege Violation",
+         "url": "https://cwe.mitre.org/data/definitions/272.html"},
+    ],
+    "exported_activity": [
+        {"id": "CWE-926", "title": "Improper Export of Android Application Components",
+         "url": "https://cwe.mitre.org/data/definitions/926.html"},
+        {"id": "CWE-284", "title": "Improper Access Control",
+         "url": "https://cwe.mitre.org/data/definitions/284.html"},
+    ],
+    "exported_service": [
+        {"id": "CWE-926", "title": "Improper Export of Android Application Components",
+         "url": "https://cwe.mitre.org/data/definitions/926.html"},
+        {"id": "CWE-284", "title": "Improper Access Control",
+         "url": "https://cwe.mitre.org/data/definitions/284.html"},
+    ],
+    "exported_receiver": [
+        {"id": "CWE-925", "title": "Improper Verification of Intent by Broadcast Receiver",
+         "url": "https://cwe.mitre.org/data/definitions/925.html"},
+        {"id": "CWE-926", "title": "Improper Export of Android Application Components",
+         "url": "https://cwe.mitre.org/data/definitions/926.html"},
+    ],
+    "exported_provider": [
+        {"id": "CWE-926", "title": "Improper Export of Android Application Components",
+         "url": "https://cwe.mitre.org/data/definitions/926.html"},
+        {"id": "CWE-200", "title": "Exposure of Sensitive Information",
+         "url": "https://cwe.mitre.org/data/definitions/200.html"},
+    ],
+    "exported_component": [
+        {"id": "CWE-926", "title": "Improper Export of Android Application Components",
+         "url": "https://cwe.mitre.org/data/definitions/926.html"},
+    ],
+    "hardcoded_secret": [
+        {"id": "CWE-312", "title": "Cleartext Storage of Sensitive Information",
+         "url": "https://cwe.mitre.org/data/definitions/312.html"},
+        {"id": "CWE-798", "title": "Use of Hard-coded Credentials",
+         "url": "https://cwe.mitre.org/data/definitions/798.html"},
+    ],
+    "weak_crypto": [
+        {"id": "CWE-327", "title": "Use of a Broken or Risky Cryptographic Algorithm",
+         "url": "https://cwe.mitre.org/data/definitions/327.html"},
+        {"id": "CWE-326", "title": "Inadequate Encryption Strength",
+         "url": "https://cwe.mitre.org/data/definitions/326.html"},
+    ],
+    "cleartext_traffic": [
+        {"id": "CWE-319", "title": "Cleartext Transmission of Sensitive Information",
+         "url": "https://cwe.mitre.org/data/definitions/319.html"},
+        {"id": "CWE-311", "title": "Missing Encryption of Sensitive Data",
+         "url": "https://cwe.mitre.org/data/definitions/311.html"},
+    ],
+    "low_target_sdk_cleartext": [
+        {"id": "CWE-319", "title": "Cleartext Transmission of Sensitive Information",
+         "url": "https://cwe.mitre.org/data/definitions/319.html"},
+        {"id": "CWE-1104", "title": "Use of Unmaintained Third Party Components",
+         "url": "https://cwe.mitre.org/data/definitions/1104.html"},
+    ],
+}
+
+# Maps finding_type → OWASP Mobile Top 10 (2024) category
+_OWASP_MAP: dict[str, dict] = {
+    "dangerous_permission": {
+        "id": "M1",
+        "title": "Improper Credential Usage",
+        "url": "https://owasp.org/www-project-mobile-top-10/2023-risks/m1-improper-credential-usage",
+    },
+    "exported_activity": {
+        "id": "M8",
+        "title": "Security Misconfiguration",
+        "url": "https://owasp.org/www-project-mobile-top-10/2023-risks/m8-security-misconfiguration",
+    },
+    "exported_service": {
+        "id": "M8",
+        "title": "Security Misconfiguration",
+        "url": "https://owasp.org/www-project-mobile-top-10/2023-risks/m8-security-misconfiguration",
+    },
+    "exported_receiver": {
+        "id": "M8",
+        "title": "Security Misconfiguration",
+        "url": "https://owasp.org/www-project-mobile-top-10/2023-risks/m8-security-misconfiguration",
+    },
+    "exported_provider": {
+        "id": "M8",
+        "title": "Security Misconfiguration",
+        "url": "https://owasp.org/www-project-mobile-top-10/2023-risks/m8-security-misconfiguration",
+    },
+    "exported_component": {
+        "id": "M8",
+        "title": "Security Misconfiguration",
+        "url": "https://owasp.org/www-project-mobile-top-10/2023-risks/m8-security-misconfiguration",
+    },
+    "hardcoded_secret": {
+        "id": "M1",
+        "title": "Improper Credential Usage",
+        "url": "https://owasp.org/www-project-mobile-top-10/2023-risks/m1-improper-credential-usage",
+    },
+    "weak_crypto": {
+        "id": "M10",
+        "title": "Insufficient Cryptography",
+        "url": "https://owasp.org/www-project-mobile-top-10/2023-risks/m10-insufficient-cryptography",
+    },
+    "cleartext_traffic": {
+        "id": "M5",
+        "title": "Insecure Communication",
+        "url": "https://owasp.org/www-project-mobile-top-10/2023-risks/m5-insecure-communication",
+    },
+    "low_target_sdk_cleartext": {
+        "id": "M5",
+        "title": "Insecure Communication",
+        "url": "https://owasp.org/www-project-mobile-top-10/2023-risks/m5-insecure-communication",
+    },
+}
+
+
+def get_references(finding_type: str) -> dict:
+    """Return CWE + OWASP Mobile Top 10 references for a finding type.
+
+    Args:
+        finding_type: Machine-readable type slug.
+
+    Returns:
+        Dict with 'cwe' list and 'owasp_mobile' entry (or empty if unknown).
+    """
+    return {
+        "cwe":          _CWE_MAP.get(finding_type, []),
+        "owasp_mobile": _OWASP_MAP.get(finding_type, {}),
+    }
+
+
+# ---------------------------------------------------------------------------
 # Finding Schema Helper
 # ---------------------------------------------------------------------------
 
@@ -250,17 +386,20 @@ def make_finding(
     """
     score = compute_score(finding_type, evidence, extra)
     severity = score_to_severity(score)
+    refs = get_references(finding_type)
 
     finding: dict[str, Any] = {
         "id":           make_finding_id(category),
         "type":         finding_type,
         "cvss_score":   score,
-        "severity":     severity,          # computed from score
-        "severity_hint": severity_hint,    # kept for backward compat
+        "severity":     severity,
+        "severity_hint": severity_hint,
         "title":        title,
         "location":     location,
         "evidence":     evidence,
         "source":       source,
+        "cwe":          refs["cwe"],
+        "owasp_mobile": refs["owasp_mobile"],
     }
     if line is not None:
         finding["line"] = line

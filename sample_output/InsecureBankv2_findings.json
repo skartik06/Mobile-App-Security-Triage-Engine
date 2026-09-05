@@ -13,60 +13,33 @@
     {
       "id": "PERM_001",
       "type": "dangerous_permission",
-      "cvss_score": 6.5,
-      "severity": "Medium",
-      "severity_hint": "Medium",
-      "title": "Dangerous permission declared: READ_PHONE_STATE",
-      "location": "AndroidManifest.xml",
-      "evidence": "android.permission.READ_PHONE_STATE",
-      "source": "androguard"
-    },
-    {
-      "id": "PERM_002",
-      "type": "dangerous_permission",
-      "cvss_score": 5.5,
-      "severity": "Medium",
-      "severity_hint": "Medium",
-      "title": "Dangerous permission declared: ACCESS_COARSE_LOCATION",
-      "location": "AndroidManifest.xml",
-      "evidence": "android.permission.ACCESS_COARSE_LOCATION",
-      "source": "androguard"
-    },
-    {
-      "id": "PERM_003",
-      "type": "dangerous_permission",
-      "cvss_score": 6.0,
-      "severity": "Medium",
-      "severity_hint": "Medium",
-      "title": "Dangerous permission declared: WRITE_EXTERNAL_STORAGE",
-      "location": "AndroidManifest.xml",
-      "evidence": "android.permission.WRITE_EXTERNAL_STORAGE",
-      "source": "androguard"
-    },
-    {
-      "id": "PERM_004",
-      "type": "dangerous_permission",
-      "cvss_score": 5.5,
-      "severity": "Medium",
-      "severity_hint": "Medium",
-      "title": "Dangerous permission declared: READ_EXTERNAL_STORAGE",
-      "location": "AndroidManifest.xml",
-      "evidence": "android.permission.READ_EXTERNAL_STORAGE",
-      "source": "androguard"
-    },
-    {
-      "id": "PERM_005",
-      "type": "dangerous_permission",
       "cvss_score": 7.0,
       "severity": "High",
       "severity_hint": "Medium",
-      "title": "Dangerous permission declared: GET_ACCOUNTS",
+      "title": "Dangerous permission declared: READ_CONTACTS",
       "location": "AndroidManifest.xml",
-      "evidence": "android.permission.GET_ACCOUNTS",
-      "source": "androguard"
+      "evidence": "android.permission.READ_CONTACTS",
+      "source": "androguard",
+      "cwe": [
+        {
+          "id": "CWE-250",
+          "title": "Execution with Unnecessary Privileges",
+          "url": "https://cwe.mitre.org/data/definitions/250.html"
+        },
+        {
+          "id": "CWE-272",
+          "title": "Least Privilege Violation",
+          "url": "https://cwe.mitre.org/data/definitions/272.html"
+        }
+      ],
+      "owasp_mobile": {
+        "id": "M1",
+        "title": "Improper Credential Usage",
+        "url": "https://owasp.org/www-project-mobile-top-10/2023-risks/m1-improper-credential-usage"
+      }
     },
     {
-      "id": "PERM_006",
+      "id": "PERM_002",
       "type": "dangerous_permission",
       "cvss_score": 8.5,
       "severity": "High",
@@ -74,32 +47,55 @@
       "title": "Dangerous permission declared: SEND_SMS",
       "location": "AndroidManifest.xml",
       "evidence": "android.permission.SEND_SMS",
-      "source": "androguard"
+      "source": "androguard",
+      "cwe": [
+        {
+          "id": "CWE-250",
+          "title": "Execution with Unnecessary Privileges",
+          "url": "https://cwe.mitre.org/data/definitions/250.html"
+        },
+        {
+          "id": "CWE-272",
+          "title": "Least Privilege Violation",
+          "url": "https://cwe.mitre.org/data/definitions/272.html"
+        }
+      ],
+      "owasp_mobile": {
+        "id": "M1",
+        "title": "Improper Credential Usage",
+        "url": "https://owasp.org/www-project-mobile-top-10/2023-risks/m1-improper-credential-usage"
+      }
     },
     {
-      "id": "PERM_007",
+      "id": "PERM_003",
       "type": "dangerous_permission",
-      "cvss_score": 7.0,
-      "severity": "High",
+      "cvss_score": 5.5,
+      "severity": "Medium",
       "severity_hint": "Medium",
-      "title": "Dangerous permission declared: READ_CONTACTS",
+      "title": "Dangerous permission declared: READ_EXTERNAL_STORAGE",
       "location": "AndroidManifest.xml",
-      "evidence": "android.permission.READ_CONTACTS",
-      "source": "androguard"
+      "evidence": "android.permission.READ_EXTERNAL_STORAGE",
+      "source": "androguard",
+      "cwe": [
+        {
+          "id": "CWE-250",
+          "title": "Execution with Unnecessary Privileges",
+          "url": "https://cwe.mitre.org/data/definitions/250.html"
+        },
+        {
+          "id": "CWE-272",
+          "title": "Least Privilege Violation",
+          "url": "https://cwe.mitre.org/data/definitions/272.html"
+        }
+      ],
+      "owasp_mobile": {
+        "id": "M1",
+        "title": "Improper Credential Usage",
+        "url": "https://owasp.org/www-project-mobile-top-10/2023-risks/m1-improper-credential-usage"
+      }
     },
     {
-      "id": "PERM_008",
-      "type": "dangerous_permission",
-      "cvss_score": 8.0,
-      "severity": "High",
-      "severity_hint": "Medium",
-      "title": "Dangerous permission declared: READ_CALL_LOG",
-      "location": "AndroidManifest.xml",
-      "evidence": "android.permission.READ_CALL_LOG",
-      "source": "androguard"
-    },
-    {
-      "id": "PERM_009",
+      "id": "PERM_004",
       "type": "dangerous_permission",
       "cvss_score": 4.0,
       "severity": "Medium",
@@ -107,7 +103,164 @@
       "title": "Dangerous permission declared: INTERNET",
       "location": "AndroidManifest.xml",
       "evidence": "android.permission.INTERNET",
-      "source": "androguard"
+      "source": "androguard",
+      "cwe": [
+        {
+          "id": "CWE-250",
+          "title": "Execution with Unnecessary Privileges",
+          "url": "https://cwe.mitre.org/data/definitions/250.html"
+        },
+        {
+          "id": "CWE-272",
+          "title": "Least Privilege Violation",
+          "url": "https://cwe.mitre.org/data/definitions/272.html"
+        }
+      ],
+      "owasp_mobile": {
+        "id": "M1",
+        "title": "Improper Credential Usage",
+        "url": "https://owasp.org/www-project-mobile-top-10/2023-risks/m1-improper-credential-usage"
+      }
+    },
+    {
+      "id": "PERM_005",
+      "type": "dangerous_permission",
+      "cvss_score": 6.5,
+      "severity": "Medium",
+      "severity_hint": "Medium",
+      "title": "Dangerous permission declared: READ_PHONE_STATE",
+      "location": "AndroidManifest.xml",
+      "evidence": "android.permission.READ_PHONE_STATE",
+      "source": "androguard",
+      "cwe": [
+        {
+          "id": "CWE-250",
+          "title": "Execution with Unnecessary Privileges",
+          "url": "https://cwe.mitre.org/data/definitions/250.html"
+        },
+        {
+          "id": "CWE-272",
+          "title": "Least Privilege Violation",
+          "url": "https://cwe.mitre.org/data/definitions/272.html"
+        }
+      ],
+      "owasp_mobile": {
+        "id": "M1",
+        "title": "Improper Credential Usage",
+        "url": "https://owasp.org/www-project-mobile-top-10/2023-risks/m1-improper-credential-usage"
+      }
+    },
+    {
+      "id": "PERM_006",
+      "type": "dangerous_permission",
+      "cvss_score": 8.0,
+      "severity": "High",
+      "severity_hint": "Medium",
+      "title": "Dangerous permission declared: READ_CALL_LOG",
+      "location": "AndroidManifest.xml",
+      "evidence": "android.permission.READ_CALL_LOG",
+      "source": "androguard",
+      "cwe": [
+        {
+          "id": "CWE-250",
+          "title": "Execution with Unnecessary Privileges",
+          "url": "https://cwe.mitre.org/data/definitions/250.html"
+        },
+        {
+          "id": "CWE-272",
+          "title": "Least Privilege Violation",
+          "url": "https://cwe.mitre.org/data/definitions/272.html"
+        }
+      ],
+      "owasp_mobile": {
+        "id": "M1",
+        "title": "Improper Credential Usage",
+        "url": "https://owasp.org/www-project-mobile-top-10/2023-risks/m1-improper-credential-usage"
+      }
+    },
+    {
+      "id": "PERM_007",
+      "type": "dangerous_permission",
+      "cvss_score": 5.5,
+      "severity": "Medium",
+      "severity_hint": "Medium",
+      "title": "Dangerous permission declared: ACCESS_COARSE_LOCATION",
+      "location": "AndroidManifest.xml",
+      "evidence": "android.permission.ACCESS_COARSE_LOCATION",
+      "source": "androguard",
+      "cwe": [
+        {
+          "id": "CWE-250",
+          "title": "Execution with Unnecessary Privileges",
+          "url": "https://cwe.mitre.org/data/definitions/250.html"
+        },
+        {
+          "id": "CWE-272",
+          "title": "Least Privilege Violation",
+          "url": "https://cwe.mitre.org/data/definitions/272.html"
+        }
+      ],
+      "owasp_mobile": {
+        "id": "M1",
+        "title": "Improper Credential Usage",
+        "url": "https://owasp.org/www-project-mobile-top-10/2023-risks/m1-improper-credential-usage"
+      }
+    },
+    {
+      "id": "PERM_008",
+      "type": "dangerous_permission",
+      "cvss_score": 7.0,
+      "severity": "High",
+      "severity_hint": "Medium",
+      "title": "Dangerous permission declared: GET_ACCOUNTS",
+      "location": "AndroidManifest.xml",
+      "evidence": "android.permission.GET_ACCOUNTS",
+      "source": "androguard",
+      "cwe": [
+        {
+          "id": "CWE-250",
+          "title": "Execution with Unnecessary Privileges",
+          "url": "https://cwe.mitre.org/data/definitions/250.html"
+        },
+        {
+          "id": "CWE-272",
+          "title": "Least Privilege Violation",
+          "url": "https://cwe.mitre.org/data/definitions/272.html"
+        }
+      ],
+      "owasp_mobile": {
+        "id": "M1",
+        "title": "Improper Credential Usage",
+        "url": "https://owasp.org/www-project-mobile-top-10/2023-risks/m1-improper-credential-usage"
+      }
+    },
+    {
+      "id": "PERM_009",
+      "type": "dangerous_permission",
+      "cvss_score": 6.0,
+      "severity": "Medium",
+      "severity_hint": "Medium",
+      "title": "Dangerous permission declared: WRITE_EXTERNAL_STORAGE",
+      "location": "AndroidManifest.xml",
+      "evidence": "android.permission.WRITE_EXTERNAL_STORAGE",
+      "source": "androguard",
+      "cwe": [
+        {
+          "id": "CWE-250",
+          "title": "Execution with Unnecessary Privileges",
+          "url": "https://cwe.mitre.org/data/definitions/250.html"
+        },
+        {
+          "id": "CWE-272",
+          "title": "Least Privilege Violation",
+          "url": "https://cwe.mitre.org/data/definitions/272.html"
+        }
+      ],
+      "owasp_mobile": {
+        "id": "M1",
+        "title": "Improper Credential Usage",
+        "url": "https://owasp.org/www-project-mobile-top-10/2023-risks/m1-improper-credential-usage"
+      }
     },
     {
       "id": "EXPORT_001",
@@ -116,9 +269,11 @@
       "severity": "Medium",
       "severity_hint": "High",
       "title": "Exported Activity with no permission guard",
-      "location": "com.android.insecurebankv2.LoginActivity",
+      "location": "com.android.insecurebankv2.PostLogin",
       "evidence": "android:exported=true, no android:permission attribute",
       "source": "androguard",
+      "cwe": [],
+      "owasp_mobile": {},
       "component_type": "Activity"
     },
     {
@@ -128,9 +283,11 @@
       "severity": "Medium",
       "severity_hint": "High",
       "title": "Exported Activity with no permission guard",
-      "location": "com.android.insecurebankv2.PostLogin",
+      "location": "com.android.insecurebankv2.DoTransfer",
       "evidence": "android:exported=true, no android:permission attribute",
       "source": "androguard",
+      "cwe": [],
+      "owasp_mobile": {},
       "component_type": "Activity"
     },
     {
@@ -140,9 +297,11 @@
       "severity": "Medium",
       "severity_hint": "High",
       "title": "Exported Activity with no permission guard",
-      "location": "com.android.insecurebankv2.DoTransfer",
+      "location": "com.android.insecurebankv2.ViewStatement",
       "evidence": "android:exported=true, no android:permission attribute",
       "source": "androguard",
+      "cwe": [],
+      "owasp_mobile": {},
       "component_type": "Activity"
     },
     {
@@ -152,9 +311,11 @@
       "severity": "Medium",
       "severity_hint": "High",
       "title": "Exported Activity with no permission guard",
-      "location": "com.android.insecurebankv2.ViewStatement",
+      "location": "com.android.insecurebankv2.ChangePassword",
       "evidence": "android:exported=true, no android:permission attribute",
       "source": "androguard",
+      "cwe": [],
+      "owasp_mobile": {},
       "component_type": "Activity"
     },
     {
@@ -164,9 +325,11 @@
       "severity": "Medium",
       "severity_hint": "High",
       "title": "Exported Activity with no permission guard",
-      "location": "com.android.insecurebankv2.ChangePassword",
+      "location": "com.android.insecurebankv2.LoginActivity",
       "evidence": "android:exported=true, no android:permission attribute",
       "source": "androguard",
+      "cwe": [],
+      "owasp_mobile": {},
       "component_type": "Activity"
     },
     {
@@ -179,6 +342,8 @@
       "location": "com.android.insecurebankv2.MyBroadCastReceiver",
       "evidence": "android:exported=true, no android:permission attribute",
       "source": "androguard",
+      "cwe": [],
+      "owasp_mobile": {},
       "component_type": "BroadcastReceiver"
     },
     {
@@ -191,6 +356,8 @@
       "location": "com.android.insecurebankv2.TrackUserContentProvider",
       "evidence": "android:exported=true, no android:permission attribute",
       "source": "androguard",
+      "cwe": [],
+      "owasp_mobile": {},
       "component_type": "ContentProvider"
     },
     {
@@ -203,6 +370,23 @@
       "location": "DEX string constants",
       "evidence": "http://goo.gl/8Rd3yj",
       "source": "androguard",
+      "cwe": [
+        {
+          "id": "CWE-312",
+          "title": "Cleartext Storage of Sensitive Information",
+          "url": "https://cwe.mitre.org/data/definitions/312.html"
+        },
+        {
+          "id": "CWE-798",
+          "title": "Use of Hard-coded Credentials",
+          "url": "https://cwe.mitre.org/data/definitions/798.html"
+        }
+      ],
+      "owasp_mobile": {
+        "id": "M1",
+        "title": "Improper Credential Usage",
+        "url": "https://owasp.org/www-project-mobile-top-10/2023-risks/m1-improper-credential-usage"
+      },
       "pattern": "Hardcoded URL (HTTP)"
     },
     {
@@ -215,6 +399,23 @@
       "location": "DEX string constants",
       "evidence": "http://goo.gl/naFqQk",
       "source": "androguard",
+      "cwe": [
+        {
+          "id": "CWE-312",
+          "title": "Cleartext Storage of Sensitive Information",
+          "url": "https://cwe.mitre.org/data/definitions/312.html"
+        },
+        {
+          "id": "CWE-798",
+          "title": "Use of Hard-coded Credentials",
+          "url": "https://cwe.mitre.org/data/definitions/798.html"
+        }
+      ],
+      "owasp_mobile": {
+        "id": "M1",
+        "title": "Improper Credential Usage",
+        "url": "https://owasp.org/www-project-mobile-top-10/2023-risks/m1-improper-credential-usage"
+      },
       "pattern": "Hardcoded URL (HTTP)"
     },
     {
@@ -227,6 +428,23 @@
       "location": "DEX string constants",
       "evidence": "http://plus.google.com/",
       "source": "androguard",
+      "cwe": [
+        {
+          "id": "CWE-312",
+          "title": "Cleartext Storage of Sensitive Information",
+          "url": "https://cwe.mitre.org/data/definitions/312.html"
+        },
+        {
+          "id": "CWE-798",
+          "title": "Use of Hard-coded Credentials",
+          "url": "https://cwe.mitre.org/data/definitions/798.html"
+        }
+      ],
+      "owasp_mobile": {
+        "id": "M1",
+        "title": "Improper Credential Usage",
+        "url": "https://owasp.org/www-project-mobile-top-10/2023-risks/m1-improper-credential-usage"
+      },
       "pattern": "Hardcoded URL (HTTP)"
     },
     {
@@ -239,6 +457,23 @@
       "location": "DEX string constants",
       "evidence": "http://schema.org/ActivateAction",
       "source": "androguard",
+      "cwe": [
+        {
+          "id": "CWE-312",
+          "title": "Cleartext Storage of Sensitive Information",
+          "url": "https://cwe.mitre.org/data/definitions/312.html"
+        },
+        {
+          "id": "CWE-798",
+          "title": "Use of Hard-coded Credentials",
+          "url": "https://cwe.mitre.org/data/definitions/798.html"
+        }
+      ],
+      "owasp_mobile": {
+        "id": "M1",
+        "title": "Improper Credential Usage",
+        "url": "https://owasp.org/www-project-mobile-top-10/2023-risks/m1-improper-credential-usage"
+      },
       "pattern": "Hardcoded URL (HTTP)"
     },
     {
@@ -251,6 +486,23 @@
       "location": "DEX string constants",
       "evidence": "http://schema.org/ActiveActionStatus",
       "source": "androguard",
+      "cwe": [
+        {
+          "id": "CWE-312",
+          "title": "Cleartext Storage of Sensitive Information",
+          "url": "https://cwe.mitre.org/data/definitions/312.html"
+        },
+        {
+          "id": "CWE-798",
+          "title": "Use of Hard-coded Credentials",
+          "url": "https://cwe.mitre.org/data/definitions/798.html"
+        }
+      ],
+      "owasp_mobile": {
+        "id": "M1",
+        "title": "Improper Credential Usage",
+        "url": "https://owasp.org/www-project-mobile-top-10/2023-risks/m1-improper-credential-usage"
+      },
       "pattern": "Hardcoded URL (HTTP)"
     },
     {
@@ -263,6 +515,23 @@
       "location": "DEX string constants",
       "evidence": "http://schema.org/AddAction",
       "source": "androguard",
+      "cwe": [
+        {
+          "id": "CWE-312",
+          "title": "Cleartext Storage of Sensitive Information",
+          "url": "https://cwe.mitre.org/data/definitions/312.html"
+        },
+        {
+          "id": "CWE-798",
+          "title": "Use of Hard-coded Credentials",
+          "url": "https://cwe.mitre.org/data/definitions/798.html"
+        }
+      ],
+      "owasp_mobile": {
+        "id": "M1",
+        "title": "Improper Credential Usage",
+        "url": "https://owasp.org/www-project-mobile-top-10/2023-risks/m1-improper-credential-usage"
+      },
       "pattern": "Hardcoded URL (HTTP)"
     },
     {
@@ -275,6 +544,23 @@
       "location": "DEX string constants",
       "evidence": "http://schema.org/BookmarkAction",
       "source": "androguard",
+      "cwe": [
+        {
+          "id": "CWE-312",
+          "title": "Cleartext Storage of Sensitive Information",
+          "url": "https://cwe.mitre.org/data/definitions/312.html"
+        },
+        {
+          "id": "CWE-798",
+          "title": "Use of Hard-coded Credentials",
+          "url": "https://cwe.mitre.org/data/definitions/798.html"
+        }
+      ],
+      "owasp_mobile": {
+        "id": "M1",
+        "title": "Improper Credential Usage",
+        "url": "https://owasp.org/www-project-mobile-top-10/2023-risks/m1-improper-credential-usage"
+      },
       "pattern": "Hardcoded URL (HTTP)"
     },
     {
@@ -287,6 +573,23 @@
       "location": "DEX string constants",
       "evidence": "http://schema.org/CommunicateAction",
       "source": "androguard",
+      "cwe": [
+        {
+          "id": "CWE-312",
+          "title": "Cleartext Storage of Sensitive Information",
+          "url": "https://cwe.mitre.org/data/definitions/312.html"
+        },
+        {
+          "id": "CWE-798",
+          "title": "Use of Hard-coded Credentials",
+          "url": "https://cwe.mitre.org/data/definitions/798.html"
+        }
+      ],
+      "owasp_mobile": {
+        "id": "M1",
+        "title": "Improper Credential Usage",
+        "url": "https://owasp.org/www-project-mobile-top-10/2023-risks/m1-improper-credential-usage"
+      },
       "pattern": "Hardcoded URL (HTTP)"
     },
     {
@@ -299,6 +602,23 @@
       "location": "DEX string constants",
       "evidence": "http://schema.org/CompletedActionStatus",
       "source": "androguard",
+      "cwe": [
+        {
+          "id": "CWE-312",
+          "title": "Cleartext Storage of Sensitive Information",
+          "url": "https://cwe.mitre.org/data/definitions/312.html"
+        },
+        {
+          "id": "CWE-798",
+          "title": "Use of Hard-coded Credentials",
+          "url": "https://cwe.mitre.org/data/definitions/798.html"
+        }
+      ],
+      "owasp_mobile": {
+        "id": "M1",
+        "title": "Improper Credential Usage",
+        "url": "https://owasp.org/www-project-mobile-top-10/2023-risks/m1-improper-credential-usage"
+      },
       "pattern": "Hardcoded URL (HTTP)"
     },
     {
@@ -311,6 +631,23 @@
       "location": "DEX string constants",
       "evidence": "http://schema.org/FailedActionStatus",
       "source": "androguard",
+      "cwe": [
+        {
+          "id": "CWE-312",
+          "title": "Cleartext Storage of Sensitive Information",
+          "url": "https://cwe.mitre.org/data/definitions/312.html"
+        },
+        {
+          "id": "CWE-798",
+          "title": "Use of Hard-coded Credentials",
+          "url": "https://cwe.mitre.org/data/definitions/798.html"
+        }
+      ],
+      "owasp_mobile": {
+        "id": "M1",
+        "title": "Improper Credential Usage",
+        "url": "https://owasp.org/www-project-mobile-top-10/2023-risks/m1-improper-credential-usage"
+      },
       "pattern": "Hardcoded URL (HTTP)"
     },
     {
@@ -323,6 +660,23 @@
       "location": "DEX string constants",
       "evidence": "http://schema.org/FilmAction",
       "source": "androguard",
+      "cwe": [
+        {
+          "id": "CWE-312",
+          "title": "Cleartext Storage of Sensitive Information",
+          "url": "https://cwe.mitre.org/data/definitions/312.html"
+        },
+        {
+          "id": "CWE-798",
+          "title": "Use of Hard-coded Credentials",
+          "url": "https://cwe.mitre.org/data/definitions/798.html"
+        }
+      ],
+      "owasp_mobile": {
+        "id": "M1",
+        "title": "Improper Credential Usage",
+        "url": "https://owasp.org/www-project-mobile-top-10/2023-risks/m1-improper-credential-usage"
+      },
       "pattern": "Hardcoded URL (HTTP)"
     },
     {
@@ -335,6 +689,23 @@
       "location": "DEX string constants",
       "evidence": "http://schema.org/LikeAction",
       "source": "androguard",
+      "cwe": [
+        {
+          "id": "CWE-312",
+          "title": "Cleartext Storage of Sensitive Information",
+          "url": "https://cwe.mitre.org/data/definitions/312.html"
+        },
+        {
+          "id": "CWE-798",
+          "title": "Use of Hard-coded Credentials",
+          "url": "https://cwe.mitre.org/data/definitions/798.html"
+        }
+      ],
+      "owasp_mobile": {
+        "id": "M1",
+        "title": "Improper Credential Usage",
+        "url": "https://owasp.org/www-project-mobile-top-10/2023-risks/m1-improper-credential-usage"
+      },
       "pattern": "Hardcoded URL (HTTP)"
     },
     {
@@ -347,6 +718,23 @@
       "location": "DEX string constants",
       "evidence": "http://schema.org/ListenAction",
       "source": "androguard",
+      "cwe": [
+        {
+          "id": "CWE-312",
+          "title": "Cleartext Storage of Sensitive Information",
+          "url": "https://cwe.mitre.org/data/definitions/312.html"
+        },
+        {
+          "id": "CWE-798",
+          "title": "Use of Hard-coded Credentials",
+          "url": "https://cwe.mitre.org/data/definitions/798.html"
+        }
+      ],
+      "owasp_mobile": {
+        "id": "M1",
+        "title": "Improper Credential Usage",
+        "url": "https://owasp.org/www-project-mobile-top-10/2023-risks/m1-improper-credential-usage"
+      },
       "pattern": "Hardcoded URL (HTTP)"
     },
     {
@@ -359,6 +747,23 @@
       "location": "DEX string constants",
       "evidence": "http://schema.org/PhotographAction",
       "source": "androguard",
+      "cwe": [
+        {
+          "id": "CWE-312",
+          "title": "Cleartext Storage of Sensitive Information",
+          "url": "https://cwe.mitre.org/data/definitions/312.html"
+        },
+        {
+          "id": "CWE-798",
+          "title": "Use of Hard-coded Credentials",
+          "url": "https://cwe.mitre.org/data/definitions/798.html"
+        }
+      ],
+      "owasp_mobile": {
+        "id": "M1",
+        "title": "Improper Credential Usage",
+        "url": "https://owasp.org/www-project-mobile-top-10/2023-risks/m1-improper-credential-usage"
+      },
       "pattern": "Hardcoded URL (HTTP)"
     },
     {
@@ -371,6 +776,23 @@
       "location": "DEX string constants",
       "evidence": "http://schema.org/ReserveAction",
       "source": "androguard",
+      "cwe": [
+        {
+          "id": "CWE-312",
+          "title": "Cleartext Storage of Sensitive Information",
+          "url": "https://cwe.mitre.org/data/definitions/312.html"
+        },
+        {
+          "id": "CWE-798",
+          "title": "Use of Hard-coded Credentials",
+          "url": "https://cwe.mitre.org/data/definitions/798.html"
+        }
+      ],
+      "owasp_mobile": {
+        "id": "M1",
+        "title": "Improper Credential Usage",
+        "url": "https://owasp.org/www-project-mobile-top-10/2023-risks/m1-improper-credential-usage"
+      },
       "pattern": "Hardcoded URL (HTTP)"
     },
     {
@@ -383,6 +805,23 @@
       "location": "DEX string constants",
       "evidence": "http://schema.org/SearchAction",
       "source": "androguard",
+      "cwe": [
+        {
+          "id": "CWE-312",
+          "title": "Cleartext Storage of Sensitive Information",
+          "url": "https://cwe.mitre.org/data/definitions/312.html"
+        },
+        {
+          "id": "CWE-798",
+          "title": "Use of Hard-coded Credentials",
+          "url": "https://cwe.mitre.org/data/definitions/798.html"
+        }
+      ],
+      "owasp_mobile": {
+        "id": "M1",
+        "title": "Improper Credential Usage",
+        "url": "https://owasp.org/www-project-mobile-top-10/2023-risks/m1-improper-credential-usage"
+      },
       "pattern": "Hardcoded URL (HTTP)"
     },
     {
@@ -395,6 +834,23 @@
       "location": "DEX string constants",
       "evidence": "http://schema.org/ViewAction",
       "source": "androguard",
+      "cwe": [
+        {
+          "id": "CWE-312",
+          "title": "Cleartext Storage of Sensitive Information",
+          "url": "https://cwe.mitre.org/data/definitions/312.html"
+        },
+        {
+          "id": "CWE-798",
+          "title": "Use of Hard-coded Credentials",
+          "url": "https://cwe.mitre.org/data/definitions/798.html"
+        }
+      ],
+      "owasp_mobile": {
+        "id": "M1",
+        "title": "Improper Credential Usage",
+        "url": "https://owasp.org/www-project-mobile-top-10/2023-risks/m1-improper-credential-usage"
+      },
       "pattern": "Hardcoded URL (HTTP)"
     },
     {
@@ -407,6 +863,23 @@
       "location": "DEX string constants",
       "evidence": "http://schema.org/WantAction",
       "source": "androguard",
+      "cwe": [
+        {
+          "id": "CWE-312",
+          "title": "Cleartext Storage of Sensitive Information",
+          "url": "https://cwe.mitre.org/data/definitions/312.html"
+        },
+        {
+          "id": "CWE-798",
+          "title": "Use of Hard-coded Credentials",
+          "url": "https://cwe.mitre.org/data/definitions/798.html"
+        }
+      ],
+      "owasp_mobile": {
+        "id": "M1",
+        "title": "Improper Credential Usage",
+        "url": "https://owasp.org/www-project-mobile-top-10/2023-risks/m1-improper-credential-usage"
+      },
       "pattern": "Hardcoded URL (HTTP)"
     },
     {
@@ -419,6 +892,23 @@
       "location": "DEX string constants",
       "evidence": "http://schema.org/WatchAction",
       "source": "androguard",
+      "cwe": [
+        {
+          "id": "CWE-312",
+          "title": "Cleartext Storage of Sensitive Information",
+          "url": "https://cwe.mitre.org/data/definitions/312.html"
+        },
+        {
+          "id": "CWE-798",
+          "title": "Use of Hard-coded Credentials",
+          "url": "https://cwe.mitre.org/data/definitions/798.html"
+        }
+      ],
+      "owasp_mobile": {
+        "id": "M1",
+        "title": "Improper Credential Usage",
+        "url": "https://owasp.org/www-project-mobile-top-10/2023-risks/m1-improper-credential-usage"
+      },
       "pattern": "Hardcoded URL (HTTP)"
     },
     {
@@ -431,6 +921,23 @@
       "location": "DEX string constants",
       "evidence": "http://schemas.android.com/apk/lib/com.google.android.gms.pl…",
       "source": "androguard",
+      "cwe": [
+        {
+          "id": "CWE-312",
+          "title": "Cleartext Storage of Sensitive Information",
+          "url": "https://cwe.mitre.org/data/definitions/312.html"
+        },
+        {
+          "id": "CWE-798",
+          "title": "Use of Hard-coded Credentials",
+          "url": "https://cwe.mitre.org/data/definitions/798.html"
+        }
+      ],
+      "owasp_mobile": {
+        "id": "M1",
+        "title": "Improper Credential Usage",
+        "url": "https://owasp.org/www-project-mobile-top-10/2023-risks/m1-improper-credential-usage"
+      },
       "pattern": "Hardcoded URL (HTTP)"
     },
     {
@@ -443,6 +950,23 @@
       "location": "DEX string constants",
       "evidence": "http://www.google-analytics.com",
       "source": "androguard",
+      "cwe": [
+        {
+          "id": "CWE-312",
+          "title": "Cleartext Storage of Sensitive Information",
+          "url": "https://cwe.mitre.org/data/definitions/312.html"
+        },
+        {
+          "id": "CWE-798",
+          "title": "Use of Hard-coded Credentials",
+          "url": "https://cwe.mitre.org/data/definitions/798.html"
+        }
+      ],
+      "owasp_mobile": {
+        "id": "M1",
+        "title": "Improper Credential Usage",
+        "url": "https://owasp.org/www-project-mobile-top-10/2023-risks/m1-improper-credential-usage"
+      },
       "pattern": "Hardcoded URL (HTTP)"
     },
     {
@@ -455,6 +979,23 @@
       "location": "DEX string constants",
       "evidence": "http://www.google.com",
       "source": "androguard",
+      "cwe": [
+        {
+          "id": "CWE-312",
+          "title": "Cleartext Storage of Sensitive Information",
+          "url": "https://cwe.mitre.org/data/definitions/312.html"
+        },
+        {
+          "id": "CWE-798",
+          "title": "Use of Hard-coded Credentials",
+          "url": "https://cwe.mitre.org/data/definitions/798.html"
+        }
+      ],
+      "owasp_mobile": {
+        "id": "M1",
+        "title": "Improper Credential Usage",
+        "url": "https://owasp.org/www-project-mobile-top-10/2023-risks/m1-improper-credential-usage"
+      },
       "pattern": "Hardcoded URL (HTTP)"
     },
     {
@@ -467,6 +1008,23 @@
       "location": "AndroidManifest.xml → <uses-sdk>",
       "evidence": "android:targetSdkVersion=\"22\"",
       "source": "androguard",
+      "cwe": [
+        {
+          "id": "CWE-319",
+          "title": "Cleartext Transmission of Sensitive Information",
+          "url": "https://cwe.mitre.org/data/definitions/319.html"
+        },
+        {
+          "id": "CWE-1104",
+          "title": "Use of Unmaintained Third Party Components",
+          "url": "https://cwe.mitre.org/data/definitions/1104.html"
+        }
+      ],
+      "owasp_mobile": {
+        "id": "M5",
+        "title": "Insecure Communication",
+        "url": "https://owasp.org/www-project-mobile-top-10/2023-risks/m5-insecure-communication"
+      },
       "target_sdk": "22"
     }
   ],
