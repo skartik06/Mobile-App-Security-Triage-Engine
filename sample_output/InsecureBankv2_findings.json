@@ -13,24 +13,30 @@
     {
       "id": "PERM_001",
       "type": "dangerous_permission",
+      "cvss_score": 6.5,
+      "severity": "Medium",
       "severity_hint": "Medium",
-      "title": "Dangerous permission declared: SEND_SMS",
+      "title": "Dangerous permission declared: READ_PHONE_STATE",
       "location": "AndroidManifest.xml",
-      "evidence": "android.permission.SEND_SMS",
+      "evidence": "android.permission.READ_PHONE_STATE",
       "source": "androguard"
     },
     {
       "id": "PERM_002",
       "type": "dangerous_permission",
+      "cvss_score": 5.5,
+      "severity": "Medium",
       "severity_hint": "Medium",
-      "title": "Dangerous permission declared: GET_ACCOUNTS",
+      "title": "Dangerous permission declared: ACCESS_COARSE_LOCATION",
       "location": "AndroidManifest.xml",
-      "evidence": "android.permission.GET_ACCOUNTS",
+      "evidence": "android.permission.ACCESS_COARSE_LOCATION",
       "source": "androguard"
     },
     {
       "id": "PERM_003",
       "type": "dangerous_permission",
+      "cvss_score": 6.0,
+      "severity": "Medium",
       "severity_hint": "Medium",
       "title": "Dangerous permission declared: WRITE_EXTERNAL_STORAGE",
       "location": "AndroidManifest.xml",
@@ -40,33 +46,8 @@
     {
       "id": "PERM_004",
       "type": "dangerous_permission",
-      "severity_hint": "Medium",
-      "title": "Dangerous permission declared: READ_CONTACTS",
-      "location": "AndroidManifest.xml",
-      "evidence": "android.permission.READ_CONTACTS",
-      "source": "androguard"
-    },
-    {
-      "id": "PERM_005",
-      "type": "dangerous_permission",
-      "severity_hint": "Medium",
-      "title": "Dangerous permission declared: READ_CALL_LOG",
-      "location": "AndroidManifest.xml",
-      "evidence": "android.permission.READ_CALL_LOG",
-      "source": "androguard"
-    },
-    {
-      "id": "PERM_006",
-      "type": "dangerous_permission",
-      "severity_hint": "Low",
-      "title": "Dangerous permission declared: INTERNET",
-      "location": "AndroidManifest.xml",
-      "evidence": "android.permission.INTERNET",
-      "source": "androguard"
-    },
-    {
-      "id": "PERM_007",
-      "type": "dangerous_permission",
+      "cvss_score": 5.5,
+      "severity": "Medium",
       "severity_hint": "Medium",
       "title": "Dangerous permission declared: READ_EXTERNAL_STORAGE",
       "location": "AndroidManifest.xml",
@@ -74,46 +55,65 @@
       "source": "androguard"
     },
     {
+      "id": "PERM_005",
+      "type": "dangerous_permission",
+      "cvss_score": 7.0,
+      "severity": "High",
+      "severity_hint": "Medium",
+      "title": "Dangerous permission declared: GET_ACCOUNTS",
+      "location": "AndroidManifest.xml",
+      "evidence": "android.permission.GET_ACCOUNTS",
+      "source": "androguard"
+    },
+    {
+      "id": "PERM_006",
+      "type": "dangerous_permission",
+      "cvss_score": 8.5,
+      "severity": "High",
+      "severity_hint": "Medium",
+      "title": "Dangerous permission declared: SEND_SMS",
+      "location": "AndroidManifest.xml",
+      "evidence": "android.permission.SEND_SMS",
+      "source": "androguard"
+    },
+    {
+      "id": "PERM_007",
+      "type": "dangerous_permission",
+      "cvss_score": 7.0,
+      "severity": "High",
+      "severity_hint": "Medium",
+      "title": "Dangerous permission declared: READ_CONTACTS",
+      "location": "AndroidManifest.xml",
+      "evidence": "android.permission.READ_CONTACTS",
+      "source": "androguard"
+    },
+    {
       "id": "PERM_008",
       "type": "dangerous_permission",
+      "cvss_score": 8.0,
+      "severity": "High",
       "severity_hint": "Medium",
-      "title": "Dangerous permission declared: ACCESS_COARSE_LOCATION",
+      "title": "Dangerous permission declared: READ_CALL_LOG",
       "location": "AndroidManifest.xml",
-      "evidence": "android.permission.ACCESS_COARSE_LOCATION",
+      "evidence": "android.permission.READ_CALL_LOG",
       "source": "androguard"
     },
     {
       "id": "PERM_009",
       "type": "dangerous_permission",
-      "severity_hint": "Medium",
-      "title": "Dangerous permission declared: READ_PHONE_STATE",
+      "cvss_score": 4.0,
+      "severity": "Medium",
+      "severity_hint": "Low",
+      "title": "Dangerous permission declared: INTERNET",
       "location": "AndroidManifest.xml",
-      "evidence": "android.permission.READ_PHONE_STATE",
+      "evidence": "android.permission.INTERNET",
       "source": "androguard"
     },
     {
       "id": "EXPORT_001",
       "type": "exported_component_no_permission",
-      "severity_hint": "High",
-      "title": "Exported Activity with no permission guard",
-      "location": "com.android.insecurebankv2.ViewStatement",
-      "evidence": "android:exported=true, no android:permission attribute",
-      "source": "androguard",
-      "component_type": "Activity"
-    },
-    {
-      "id": "EXPORT_002",
-      "type": "exported_component_no_permission",
-      "severity_hint": "High",
-      "title": "Exported Activity with no permission guard",
-      "location": "com.android.insecurebankv2.ChangePassword",
-      "evidence": "android:exported=true, no android:permission attribute",
-      "source": "androguard",
-      "component_type": "Activity"
-    },
-    {
-      "id": "EXPORT_003",
-      "type": "exported_component_no_permission",
+      "cvss_score": 5.0,
+      "severity": "Medium",
       "severity_hint": "High",
       "title": "Exported Activity with no permission guard",
       "location": "com.android.insecurebankv2.LoginActivity",
@@ -122,8 +122,10 @@
       "component_type": "Activity"
     },
     {
-      "id": "EXPORT_004",
+      "id": "EXPORT_002",
       "type": "exported_component_no_permission",
+      "cvss_score": 5.0,
+      "severity": "Medium",
       "severity_hint": "High",
       "title": "Exported Activity with no permission guard",
       "location": "com.android.insecurebankv2.PostLogin",
@@ -132,8 +134,10 @@
       "component_type": "Activity"
     },
     {
-      "id": "EXPORT_005",
+      "id": "EXPORT_003",
       "type": "exported_component_no_permission",
+      "cvss_score": 5.0,
+      "severity": "Medium",
       "severity_hint": "High",
       "title": "Exported Activity with no permission guard",
       "location": "com.android.insecurebankv2.DoTransfer",
@@ -142,8 +146,34 @@
       "component_type": "Activity"
     },
     {
+      "id": "EXPORT_004",
+      "type": "exported_component_no_permission",
+      "cvss_score": 5.0,
+      "severity": "Medium",
+      "severity_hint": "High",
+      "title": "Exported Activity with no permission guard",
+      "location": "com.android.insecurebankv2.ViewStatement",
+      "evidence": "android:exported=true, no android:permission attribute",
+      "source": "androguard",
+      "component_type": "Activity"
+    },
+    {
+      "id": "EXPORT_005",
+      "type": "exported_component_no_permission",
+      "cvss_score": 5.0,
+      "severity": "Medium",
+      "severity_hint": "High",
+      "title": "Exported Activity with no permission guard",
+      "location": "com.android.insecurebankv2.ChangePassword",
+      "evidence": "android:exported=true, no android:permission attribute",
+      "source": "androguard",
+      "component_type": "Activity"
+    },
+    {
       "id": "EXPORT_006",
       "type": "exported_component_no_permission",
+      "cvss_score": 5.0,
+      "severity": "Medium",
       "severity_hint": "Medium",
       "title": "Exported BroadcastReceiver with no permission guard",
       "location": "com.android.insecurebankv2.MyBroadCastReceiver",
@@ -154,6 +184,8 @@
     {
       "id": "EXPORT_007",
       "type": "exported_component_no_permission",
+      "cvss_score": 5.0,
+      "severity": "Medium",
       "severity_hint": "High",
       "title": "Exported ContentProvider with no permission guard",
       "location": "com.android.insecurebankv2.TrackUserContentProvider",
@@ -164,6 +196,8 @@
     {
       "id": "SECRET_001",
       "type": "hardcoded_secret",
+      "cvss_score": 4.5,
+      "severity": "Medium",
       "severity_hint": "Medium",
       "title": "Potential hardcoded secret: Hardcoded URL (HTTP)",
       "location": "DEX string constants",
@@ -174,6 +208,8 @@
     {
       "id": "SECRET_002",
       "type": "hardcoded_secret",
+      "cvss_score": 4.5,
+      "severity": "Medium",
       "severity_hint": "Medium",
       "title": "Potential hardcoded secret: Hardcoded URL (HTTP)",
       "location": "DEX string constants",
@@ -184,6 +220,8 @@
     {
       "id": "SECRET_003",
       "type": "hardcoded_secret",
+      "cvss_score": 4.5,
+      "severity": "Medium",
       "severity_hint": "Medium",
       "title": "Potential hardcoded secret: Hardcoded URL (HTTP)",
       "location": "DEX string constants",
@@ -194,6 +232,8 @@
     {
       "id": "SECRET_004",
       "type": "hardcoded_secret",
+      "cvss_score": 4.5,
+      "severity": "Medium",
       "severity_hint": "Medium",
       "title": "Potential hardcoded secret: Hardcoded URL (HTTP)",
       "location": "DEX string constants",
@@ -204,6 +244,8 @@
     {
       "id": "SECRET_005",
       "type": "hardcoded_secret",
+      "cvss_score": 4.5,
+      "severity": "Medium",
       "severity_hint": "Medium",
       "title": "Potential hardcoded secret: Hardcoded URL (HTTP)",
       "location": "DEX string constants",
@@ -214,6 +256,8 @@
     {
       "id": "SECRET_006",
       "type": "hardcoded_secret",
+      "cvss_score": 4.5,
+      "severity": "Medium",
       "severity_hint": "Medium",
       "title": "Potential hardcoded secret: Hardcoded URL (HTTP)",
       "location": "DEX string constants",
@@ -224,6 +268,8 @@
     {
       "id": "SECRET_007",
       "type": "hardcoded_secret",
+      "cvss_score": 4.5,
+      "severity": "Medium",
       "severity_hint": "Medium",
       "title": "Potential hardcoded secret: Hardcoded URL (HTTP)",
       "location": "DEX string constants",
@@ -234,6 +280,8 @@
     {
       "id": "SECRET_008",
       "type": "hardcoded_secret",
+      "cvss_score": 4.5,
+      "severity": "Medium",
       "severity_hint": "Medium",
       "title": "Potential hardcoded secret: Hardcoded URL (HTTP)",
       "location": "DEX string constants",
@@ -244,6 +292,8 @@
     {
       "id": "SECRET_009",
       "type": "hardcoded_secret",
+      "cvss_score": 4.5,
+      "severity": "Medium",
       "severity_hint": "Medium",
       "title": "Potential hardcoded secret: Hardcoded URL (HTTP)",
       "location": "DEX string constants",
@@ -254,6 +304,8 @@
     {
       "id": "SECRET_010",
       "type": "hardcoded_secret",
+      "cvss_score": 4.5,
+      "severity": "Medium",
       "severity_hint": "Medium",
       "title": "Potential hardcoded secret: Hardcoded URL (HTTP)",
       "location": "DEX string constants",
@@ -264,6 +316,8 @@
     {
       "id": "SECRET_011",
       "type": "hardcoded_secret",
+      "cvss_score": 4.5,
+      "severity": "Medium",
       "severity_hint": "Medium",
       "title": "Potential hardcoded secret: Hardcoded URL (HTTP)",
       "location": "DEX string constants",
@@ -274,6 +328,8 @@
     {
       "id": "SECRET_012",
       "type": "hardcoded_secret",
+      "cvss_score": 4.5,
+      "severity": "Medium",
       "severity_hint": "Medium",
       "title": "Potential hardcoded secret: Hardcoded URL (HTTP)",
       "location": "DEX string constants",
@@ -284,6 +340,8 @@
     {
       "id": "SECRET_013",
       "type": "hardcoded_secret",
+      "cvss_score": 4.5,
+      "severity": "Medium",
       "severity_hint": "Medium",
       "title": "Potential hardcoded secret: Hardcoded URL (HTTP)",
       "location": "DEX string constants",
@@ -294,6 +352,8 @@
     {
       "id": "SECRET_014",
       "type": "hardcoded_secret",
+      "cvss_score": 4.5,
+      "severity": "Medium",
       "severity_hint": "Medium",
       "title": "Potential hardcoded secret: Hardcoded URL (HTTP)",
       "location": "DEX string constants",
@@ -304,6 +364,8 @@
     {
       "id": "SECRET_015",
       "type": "hardcoded_secret",
+      "cvss_score": 4.5,
+      "severity": "Medium",
       "severity_hint": "Medium",
       "title": "Potential hardcoded secret: Hardcoded URL (HTTP)",
       "location": "DEX string constants",
@@ -314,6 +376,8 @@
     {
       "id": "SECRET_016",
       "type": "hardcoded_secret",
+      "cvss_score": 4.5,
+      "severity": "Medium",
       "severity_hint": "Medium",
       "title": "Potential hardcoded secret: Hardcoded URL (HTTP)",
       "location": "DEX string constants",
@@ -324,6 +388,8 @@
     {
       "id": "SECRET_017",
       "type": "hardcoded_secret",
+      "cvss_score": 4.5,
+      "severity": "Medium",
       "severity_hint": "Medium",
       "title": "Potential hardcoded secret: Hardcoded URL (HTTP)",
       "location": "DEX string constants",
@@ -334,6 +400,8 @@
     {
       "id": "SECRET_018",
       "type": "hardcoded_secret",
+      "cvss_score": 4.5,
+      "severity": "Medium",
       "severity_hint": "Medium",
       "title": "Potential hardcoded secret: Hardcoded URL (HTTP)",
       "location": "DEX string constants",
@@ -344,6 +412,8 @@
     {
       "id": "SECRET_019",
       "type": "hardcoded_secret",
+      "cvss_score": 4.5,
+      "severity": "Medium",
       "severity_hint": "Medium",
       "title": "Potential hardcoded secret: Hardcoded URL (HTTP)",
       "location": "DEX string constants",
@@ -354,6 +424,8 @@
     {
       "id": "SECRET_020",
       "type": "hardcoded_secret",
+      "cvss_score": 4.5,
+      "severity": "Medium",
       "severity_hint": "Medium",
       "title": "Potential hardcoded secret: Hardcoded URL (HTTP)",
       "location": "DEX string constants",
@@ -364,6 +436,8 @@
     {
       "id": "SECRET_021",
       "type": "hardcoded_secret",
+      "cvss_score": 4.5,
+      "severity": "Medium",
       "severity_hint": "Medium",
       "title": "Potential hardcoded secret: Hardcoded URL (HTTP)",
       "location": "DEX string constants",
@@ -374,6 +448,8 @@
     {
       "id": "SECRET_022",
       "type": "hardcoded_secret",
+      "cvss_score": 4.5,
+      "severity": "Medium",
       "severity_hint": "Medium",
       "title": "Potential hardcoded secret: Hardcoded URL (HTTP)",
       "location": "DEX string constants",
@@ -384,6 +460,8 @@
     {
       "id": "NET_001",
       "type": "low_target_sdk_cleartext",
+      "cvss_score": 6.0,
+      "severity": "Medium",
       "severity_hint": "Medium",
       "title": "Target SDK 22 < 28 — cleartext traffic permitted by default",
       "location": "AndroidManifest.xml → <uses-sdk>",
@@ -394,9 +472,9 @@
   ],
   "stats": {
     "Critical": 0,
-    "High": 6,
-    "Medium": 32,
-    "Low": 1,
+    "High": 4,
+    "Medium": 35,
+    "Low": 0,
     "Total": 39
   }
 }

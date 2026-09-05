@@ -86,6 +86,136 @@ def make_finding_id(category: str) -> str:
 
 
 # ---------------------------------------------------------------------------
+# CVSS-Style Severity Scoring Engine
+# ---------------------------------------------------------------------------
+
+# Base scores per finding type (0.0 – 10.0 scale, inspired by CVSS v3)
+_BASE_SCORES: dict[str, float] = {
+    # Permissions — score reflects sensitivity of data/capability exposed
+    "dangerous_permission": 5.0,
+
+    # Exported components — directly exploitable by other apps
+    "exported_activity":  8.0,
+    "exported_service":   9.0,
+    "exported_receiver":  7.5,
+    "exported_provider":  8.5,
+    "exported_component": 8.0,   # generic fallback
+
+    # Secrets — depends on what's hardcoded (modifier applied below)
+    "hardcoded_secret": 6.5,
+
+    # Cryptography weaknesses
+    "weak_crypto": 6.0,
+
+    # Network / cleartext
+    "cleartext_traffic":       7.5,
+    "low_target_sdk_cleartext": 6.0,
+}
+
+# Per-permission severity modifiers
+_PERMISSION_SCORES: dict[str, float] = {
+    "READ_SMS":                 9.0,
+    "SEND_SMS":                 8.5,
+    "RECEIVE_SMS":              8.5,
+    "PROCESS_OUTGOING_CALLS":   8.0,
+    "READ_CALL_LOG":            8.0,
+    "RECORD_AUDIO":             8.0,
+    "CAMERA":                   7.5,
+    "ACCESS_FINE_LOCATION":     7.5,
+    "READ_CONTACTS":            7.0,
+    "GET_ACCOUNTS":             7.0,
+    "READ_PHONE_STATE":         6.5,
+    "WRITE_EXTERNAL_STORAGE":   6.0,
+    "READ_EXTERNAL_STORAGE":    5.5,
+    "ACCESS_COARSE_LOCATION":   5.5,
+    "INTERNET":                 4.0,
+    "ACCESS_NETWORK_STATE":     3.5,
+    "VIBRATE":                  1.0,
+    "RECEIVE_BOOT_COMPLETED":   3.0,
+    "WAKE_LOCK":                2.0,
+}
+
+# Crypto algorithm scores
+_CRYPTO_SCORES: dict[str, float] = {
+    "DES":     8.5,
+    "RC4":     8.5,
+    "RC2":     8.0,
+    "MD5":     7.0,
+    "SHA-1":   5.5,
+    "AES/ECB": 7.5,
+}
+
+# Secret pattern scores
+_SECRET_SCORES: dict[str, float] = {
+    "Private key / certificate":  9.5,
+    "AWS Access Key":             9.5,
+    "Hardcoded password":         9.0,
+    "Hardcoded API key":          8.5,
+    "Firebase URL":               7.5,
+    "Hardcoded token":            8.0,
+    "Hardcoded IP address":       6.0,
+    "Hardcoded URL (HTTP)":       4.5,
+}
+
+
+def compute_score(finding_type: str, evidence: str = "", extra: dict | None = None) -> float:
+    """Compute a CVSS-inspired numeric risk score (0.0–10.0) for a finding.
+
+    Args:
+        finding_type: Machine-readable type slug from make_finding().
+        evidence:     Raw evidence string (used for context-aware modifiers).
+        extra:        Extra metadata dict (e.g. contains 'permission', 'pattern').
+
+    Returns:
+        Float score rounded to 1 decimal place.
+    """
+    extra = extra or {}
+    base = _BASE_SCORES.get(finding_type, 5.0)
+
+    # Permission — use per-permission table if available
+    if finding_type == "dangerous_permission":
+        perm = extra.get("permission", evidence).split(".")[-1].upper()
+        base = _PERMISSION_SCORES.get(perm, base)
+
+    # Crypto — pick algorithm score from evidence
+    elif finding_type == "weak_crypto":
+        for algo, score in _CRYPTO_SCORES.items():
+            if algo.upper() in evidence.upper():
+                base = score
+                break
+
+    # Secret — use pattern label if available
+    elif finding_type == "hardcoded_secret":
+        pattern = extra.get("pattern", "")
+        for label, score in _SECRET_SCORES.items():
+            if label.lower() in pattern.lower():
+                base = score
+                break
+
+    return round(min(max(base, 0.0), 10.0), 1)
+
+
+def score_to_severity(score: float) -> str:
+    """Map a numeric score to a CVSS severity label.
+
+    Args:
+        score: Numeric score 0.0–10.0.
+
+    Returns:
+        One of: Critical / High / Medium / Low / Info
+    """
+    if score >= 9.0:
+        return "Critical"
+    elif score >= 7.0:
+        return "High"
+    elif score >= 4.0:
+        return "Medium"
+    elif score >= 0.1:
+        return "Low"
+    return "Info"
+
+
+# ---------------------------------------------------------------------------
 # Finding Schema Helper
 # ---------------------------------------------------------------------------
 
@@ -101,7 +231,7 @@ def make_finding(
     source: str = "androguard",
     extra: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
-    """Construct a standardised finding dict.
+    """Construct a standardised finding dict with auto-computed risk score.
 
     Args:
         category:      Short category for ID prefix (e.g. 'CRYPTO').
@@ -115,16 +245,22 @@ def make_finding(
         extra:         Any additional metadata to attach.
 
     Returns:
-        Dict conforming to the finding schema.
+        Dict conforming to the finding schema, including 'cvss_score' and
+        computed 'severity' fields.
     """
+    score = compute_score(finding_type, evidence, extra)
+    severity = score_to_severity(score)
+
     finding: dict[str, Any] = {
-        "id": make_finding_id(category),
-        "type": finding_type,
-        "severity_hint": severity_hint,
-        "title": title,
-        "location": location,
-        "evidence": evidence,
-        "source": source,
+        "id":           make_finding_id(category),
+        "type":         finding_type,
+        "cvss_score":   score,
+        "severity":     severity,          # computed from score
+        "severity_hint": severity_hint,    # kept for backward compat
+        "title":        title,
+        "location":     location,
+        "evidence":     evidence,
+        "source":       source,
     }
     if line is not None:
         finding["line"] = line

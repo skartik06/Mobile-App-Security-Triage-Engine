@@ -876,7 +876,8 @@ class APKAnalyzer:
         """
         stats: dict[str, int] = {"Critical": 0, "High": 0, "Medium": 0, "Low": 0, "Total": 0}
         for f in findings:
-            sev = f.get("severity_hint", "Low")
+            # Use CVSS-computed severity if available, fall back to severity_hint
+            sev = f.get("severity") or f.get("severity_hint", "Low")
             stats[sev] = stats.get(sev, 0) + 1
             stats["Total"] += 1
         return stats
