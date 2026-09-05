@@ -1,84 +1,123 @@
-# Mobile App Security Triage Engine 🔍
+# Mobile App Security Triage Engine
 
-A Python CLI tool that automates static security analysis of Android APK files,
-auto-generates Frida dynamic instrumentation hooks, and produces an AI-powered
-severity-ranked Markdown report — all from a single command.
+> Automated Android APK security analysis pipeline — static analysis, dynamic hook generation, and AI-powered vulnerability reporting.
 
-> ⚠️ **For defensive security research and portfolio purposes only.**  
-> Only analyze apps you own or have **explicit written permission** to test.
+![Python](https://img.shields.io/badge/Python-3.11+-blue?style=flat-square&logo=python)
+![Androguard](https://img.shields.io/badge/Androguard-4.x-green?style=flat-square)
+![Frida](https://img.shields.io/badge/Frida-17.x-red?style=flat-square)
+![Gemini](https://img.shields.io/badge/Gemini-AI-orange?style=flat-square&logo=google)
+![License](https://img.shields.io/badge/License-MIT-lightgrey?style=flat-square)
+
+---
+
+## What It Does
+
+Give it an APK. Get a full security triage report in seconds.
+
+```
+python triage.py --apk target_app.apk
+```
+
+```
+Mobile App Security Triage Engine  v0.1.0
+  APK: InsecureBankv2.apk
+
+─────────────────── Static Analysis ───────────────────
+App: InsecureBankv2  (com.android.insecurebankv2)
+Version: 1.0  |  Min SDK: 15  |  Target SDK: 22
+
+▶ Scanning permissions…
+▶ Scanning exported components…
+▶ Scanning for hardcoded secrets…
+▶ Scanning for weak/deprecated crypto…
+▶ Scanning cleartext traffic configuration…
+
+─────────────────── Scan Complete ─────────────────────
+  Critical: 0  High: 6  Medium: 32  Low: 1  Total: 39
+
+✔ Findings JSON  →  reports/InsecureBankv2_findings.json
+✔ Frida hooks    →  reports/com_android_insecurebankv2_hooks.js
+✔ AI Report      →  reports/InsecureBankv2_20260905_184118_report.md
+
+Pipeline complete!
+```
 
 ---
 
 ## Features
 
-| Phase | Tool | What it does |
-|-------|------|-------------|
-| **Static Analysis** | Androguard + JADX | Decompiles APK; scans for hardcoded secrets, dangerous permissions, exported components, weak crypto (MD5/DES/ECB), cleartext traffic |
-| **Hook Generation** | Frida (JS) | Auto-generates Frida hook scripts targeting suspicious methods found in static analysis |
-| **AI Report** | LangChain + Claude/GPT-4 | Converts raw JSON findings into a severity-ranked, human-readable Markdown report with exploit paths and remediations |
+| Phase | What it does |
+|---|---|
+| **Phase 1 — Static Analysis** | Decompiles APK with Androguard; scans for dangerous permissions, unprotected exported components, hardcoded secrets/API keys, weak crypto (MD5, DES, RC4, AES/ECB), and cleartext traffic misconfigurations |
+| **Phase 2 — Frida Hook Generator** | Auto-generates Frida JavaScript hook scripts targeting every suspicious class/method found in Phase 1 — ready to attach to a live device |
+| **Phase 3 — AI Report** | Sends findings to Google Gemini (free) / Claude / GPT-4 via LangChain; produces a professional Markdown security report with risk scenarios and remediation steps |
 
 ---
 
-## Project Structure
+## Architecture
 
 ```
-Mobile App Security Triage Engine/
-├── triage.py            # CLI entry point
-├── static_analysis.py   # Phase 1: APK decompilation + scanning
-├── hook_generator.py    # Phase 2: Frida hook script generator
-├── ai_summarizer.py     # Phase 3: AI summarization via LangChain
-├── utils.py             # Shared helpers (logging, finding schema, JSON I/O)
-├── requirements.txt
-├── .env.example         # API key template
-└── reports/             # Generated output (gitignored)
-    ├── AppName_findings.json
-    ├── com_example_app_hooks.js
-    └── AppName_20240101_120000_report.md
+APK File
+   │
+   ▼
+┌─────────────────────────────────┐
+│   Phase 1 — Static Analysis     │  ← Androguard 4.x
+│                                 │
+│  • Permissions audit            │
+│  • Exported component scan      │
+│  • Hardcoded secrets detection  │
+│  • Weak/deprecated crypto       │
+│  • Cleartext traffic config     │
+└────────────┬────────────────────┘
+             │  findings.json
+             ▼
+┌─────────────────────────────────┐
+│   Phase 2 — Hook Generator      │  ← Frida JS templates
+│                                 │
+│  • 1 hook per suspicious method │
+│  • Spawn + attach mode support  │
+│  • Ready-to-run frida command   │
+└────────────┬────────────────────┘
+             │  hooks.js
+             ▼
+┌─────────────────────────────────┐
+│   Phase 3 — AI Summarization    │  ← LangChain + Gemini/Claude/GPT-4
+│                                 │
+│  • Executive summary            │
+│  • Severity-ranked vuln table   │
+│  • Real-world exploit scenarios │
+│  • Remediation recommendations  │
+└─────────────────────────────────┘
+             │
+             ▼
+      Markdown Report
 ```
 
 ---
 
-## Setup
+## Vulnerabilities Detected
 
-### 1. Prerequisites
+- **Dangerous Permissions** — `READ_SMS`, `PROCESS_OUTGOING_CALLS`, `RECORD_AUDIO`, etc.
+- **Exported Components** — Activities, Services, Receivers without permission guards
+- **Hardcoded Secrets** — API keys, passwords, tokens via regex pattern matching
+- **Weak Cryptography** — MD5, DES, RC4, AES/ECB, SHA-1 usage in DEX bytecode
+- **Cleartext Traffic** — `android:usesCleartextTraffic`, Network Security Config misconfigs
+- **Low Target SDK** — Apps targeting SDK < 28 (Android 9) miss modern security protections
 
-- **Python 3.11+**
-- **JADX** (optional but recommended for deeper Java source scanning)
-  - Download: https://github.com/skylot/jadx/releases
-  - Windows: Extract zip, set `JADX_PATH=C:\jadx\bin\jadx.bat` in `.env`
-  - Linux/macOS: `brew install jadx` or place binary in PATH
-- **Frida** (for running the generated hook scripts on a device):
-  ```bash
-  pip install frida-tools
-  # Also install frida-server on your rooted device / emulator
-  ```
+---
 
-### 2. Install Python Dependencies
+## Installation
 
 ```bash
-# Create and activate a virtual environment (recommended)
-python -m venv .venv
-.venv\Scripts\activate        # Windows
-source .venv/bin/activate     # Linux/macOS
+git clone https://github.com/skartik06/Mobile-App-Security-Triage-Engine.git
+cd Mobile-App-Security-Triage-Engine
 
 pip install -r requirements.txt
-```
+pip install langchain-google-genai google-generativeai
 
-### 3. Configure API Keys
-
-```bash
-# Copy the template
 cp .env.example .env
-
-# Edit .env and fill in your keys
-```
-
-`.env` contents:
-```env
-LLM_PROVIDER=anthropic          # or "openai"
-ANTHROPIC_API_KEY=sk-ant-...
-OPENAI_API_KEY=sk-...           # only needed if LLM_PROVIDER=openai
-JADX_PATH=C:\jadx\bin\jadx.bat  # optional
+# Edit .env and add your free Google Gemini API key
+# Get one at: https://aistudio.google.com/apikey
 ```
 
 ---
@@ -87,118 +126,113 @@ JADX_PATH=C:\jadx\bin\jadx.bat  # optional
 
 ```bash
 # Full pipeline (static + hooks + AI report)
-python triage.py --apk path/to/app.apk
+python triage.py --apk target.apk
 
 # Skip AI summarization (faster, no API key needed)
-python triage.py --apk path/to/app.apk --skip-ai
+python triage.py --apk target.apk --skip-ai
 
-# Skip hook generation
-python triage.py --apk path/to/app.apk --skip-hooks
+# Custom output directory
+python triage.py --apk target.apk --output ./my_reports
 
-# Custom output directory + verbose logging
-python triage.py --apk app.apk --output-dir ./my_reports --verbose
-
-# Help
-python triage.py --help
+# Verbose mode (debug logging)
+python triage.py --apk target.apk --verbose
 ```
 
-### Output Files
+---
 
-After a full run, the `reports/` directory will contain:
+## Configuration (`.env`)
+
+```env
+# LLM Provider: gemini (FREE) | anthropic | openai
+LLM_PROVIDER=gemini
+
+# Google Gemini — Free tier
+# Get key: https://aistudio.google.com/apikey
+GOOGLE_API_KEY=your_key_here
+GEMINI_MODEL=gemini-3.6-flash
+
+# Optional: Anthropic Claude
+# ANTHROPIC_API_KEY=sk-ant-...
+# ANTHROPIC_MODEL=claude-sonnet-4-5
+
+# Optional: OpenAI GPT-4
+# OPENAI_API_KEY=sk-...
+# OPENAI_MODEL=gpt-4o
+```
+
+---
+
+## Output Files
+
+After each run, three files are saved to `reports/`:
 
 | File | Description |
-|------|-------------|
-| `<AppName>_findings.json` | Raw structured findings from static analysis |
-| `<package>_hooks.js` | Frida hook script (run manually on device) |
-| `<AppName>_YYYYMMDD_HHMMSS_report.md` | AI-generated Markdown security report |
+|---|---|
+| `{AppName}_findings.json` | Structured JSON — all findings with type, severity, location, evidence |
+| `{package_name}_hooks.js` | Frida hook script — attach to live device for dynamic analysis |
+| `{AppName}_{timestamp}_report.md` | AI-generated Markdown security report |
 
-### Running Frida Hooks (Manual)
+### Running the Frida Hooks
 
 ```bash
-# Spawn mode (restarts the app — hooks from the very start)
+# Spawn mode — restarts the app with hooks attached
 frida -U -f com.example.app -l reports/com_example_app_hooks.js --no-pause
 
-# Attach mode (attaches to already-running app)
+# Attach mode — hooks into already-running app
 frida -U --attach-name com.example.app -l reports/com_example_app_hooks.js
 ```
 
 ---
 
-## Example: DIVA Android
+## Project Structure
 
-[DIVA (Damn Insecure and Vulnerable App)](https://github.com/payatu/diva-android)
-is a purpose-built vulnerable Android app for testing:
-
-```bash
-# Download DIVA APK from GitHub releases, then:
-python triage.py --apk DivaApplication.apk --verbose
+```
+Mobile-App-Security-Triage-Engine/
+│
+├── triage.py            # CLI entry point (Click)
+├── static_analysis.py   # Phase 1 — Androguard-based scanner
+├── hook_generator.py    # Phase 2 — Frida JS template generator
+├── ai_summarizer.py     # Phase 3 — LangChain + LLM report writer
+├── utils.py             # Shared: logger, finding schema, JSON helpers
+│
+├── requirements.txt
+├── .env.example
+├── .gitignore
+└── reports/             # Generated output (gitignored)
 ```
 
-Expected findings include: hardcoded API keys, cleartext HTTP, MD5 crypto,
-exported activities, dangerous permissions.
+---
+
+## Tech Stack
+
+| Tool | Purpose |
+|---|---|
+| [Androguard 4.x](https://github.com/androguard/androguard) | APK parsing, DEX analysis, manifest inspection |
+| [Frida](https://frida.re) | Dynamic instrumentation hook script generation |
+| [LangChain](https://langchain.com) | LLM abstraction layer |
+| [Google Gemini](https://aistudio.google.com) | Free AI report generation |
+| [Click](https://click.palletsprojects.com) | CLI framework |
+| [Rich](https://rich.readthedocs.io) | Terminal output formatting |
 
 ---
 
-## Finding Schema
+## Tested Against
 
-Each finding in `findings.json` follows this structure:
-
-```json
-{
-  "id": "CRYPTO_001",
-  "type": "weak_crypto",
-  "severity_hint": "High",
-  "title": "Weak/deprecated crypto: MD5 MessageDigest",
-  "location": "com.example.app.Utils.hashPassword()",
-  "evidence": "java/security/MessageDigest.getInstance(\"MD5\")",
-  "source": "androguard",
-  "algorithm": "MD5"
-}
-```
-
-| Field | Description |
-|-------|-------------|
-| `id` | Unique finding ID (category + counter) |
-| `type` | Machine-readable vulnerability type |
-| `severity_hint` | Critical / High / Medium / Low |
-| `title` | One-line human-readable description |
-| `location` | Class.method() or file where evidence was found |
-| `evidence` | Raw code snippet / string that triggered the finding |
-| `source` | Tool that found it: `androguard`, `jadx`, or `regex` |
-
----
-
-## Scan Coverage
-
-| Check | Source |
-|-------|--------|
-| Dangerous Android permissions | AndroidManifest.xml (Androguard) |
-| Custom permissions | AndroidManifest.xml (Androguard) |
-| Exported Activities (no permission guard) | Manifest + Intent-filter analysis |
-| Exported Services / Receivers / Providers | Manifest analysis |
-| Hardcoded secrets (API keys, tokens, passwords) | DEX string pool (Androguard) + Java source (JADX) |
-| Weak crypto: MD5, SHA-1 | Dalvik xref analysis (Androguard) |
-| Weak crypto: DES, RC4, ECB mode | Dalvik xref analysis (Androguard) |
-| Cleartext HTTP (`usesCleartextTraffic`) | AndroidManifest.xml |
-| Network Security Config issues | `res/xml/network_security_config.xml` |
-| User certificate trust (MITM risk) | Network Security Config XML |
-| Low target SDK (< 28, cleartext default) | AndroidManifest.xml |
-
----
-
-## Roadmap
-
-- [ ] Phase 2: Full Frida hook execution integration (non-MVP)
-- [ ] CVSS scoring overlay on findings
-- [ ] HTML report output option
-- [ ] Integration with MobSF API for extended scanning
-- [ ] CI/CD mode: exit code based on severity threshold
+- [InsecureBankv2](https://github.com/dineshshetty/Android-InsecureBankv2) — 39 findings detected
+- [DIVA Android](https://github.com/payatu/diva-android) — intentionally vulnerable app
 
 ---
 
 ## Disclaimer
 
-This tool is intended for **defensive security research** on applications
-you own or have **explicit written permission** to test.
-Unauthorized security testing may violate laws including the
-Computer Fraud and Abuse Act (CFAA) and equivalent legislation in your jurisdiction.
+> This tool is intended for **defensive security research, penetration testing, and educational purposes only**.
+> Only analyze APKs you own or have explicit written permission to test.
+> The author is not responsible for any misuse.
+
+---
+
+## Author
+
+**Kartik Sharma** — [github.com/skartik06](https://github.com/skartik06)
+
+*Built as a portfolio project demonstrating mobile security research + AI integration skills.*
