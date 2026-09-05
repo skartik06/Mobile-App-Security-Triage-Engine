@@ -5,9 +5,12 @@
 *.apk
 *.aab
 
-# === Generated Reports ===
+# === Generated Reports (runtime output — gitignored) ===
 reports/
 !reports/.gitkeep
+
+# === Sample Output (demo files — tracked in git) ===
+!sample_output/
 
 # === JADX decompiled output ===
 jadx_output/
