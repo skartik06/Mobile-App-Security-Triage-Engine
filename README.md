@@ -10,6 +10,10 @@
 
 ---
 
+![Demo](sample_output/demo_screenshot.png)
+
+---
+
 ## What It Does
 
 Give it an APK. Get a full security triage report in seconds.
